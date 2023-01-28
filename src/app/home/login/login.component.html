@@ -1,0 +1,46 @@
+<h4 class="text-center">Login</h4>
+
+<form class="form mt-4" [formGroup]="autenticacaoLoginForm" (submit)="login()">
+  <div class="form-group">
+    <input
+      class="form-control"
+      placeholder="Nome do usuário"
+      formControlName="usuario"
+      required
+    />
+    <app-mensagem
+      *ngIf="
+      autenticacaoLoginForm.get('usuario')?.errors?.['required'] &&
+      autenticacaoLoginForm.get('usuario')?.touched
+      "
+      mensagem="Usuário obrigatório"
+    ></app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control"
+      placeholder="Senha"
+      formControlName="password"
+      required
+    />
+    <app-mensagem
+    *ngIf="
+    autenticacaoLoginForm.get('password')?.errors?.['required'] &&
+    autenticacaoLoginForm.get('password')?.touched
+    "
+      mensagem="Senha obrigatória"
+    ></app-mensagem>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary btn-block"
+    [disabled]="autenticacaoLoginForm.invalid"
+  >
+    Login
+  </button>
+</form>
+
+<p>Não é um usuário?<a [routerLink]="['novousuario']">Se cadastre!</a></p>
