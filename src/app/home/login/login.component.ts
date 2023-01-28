@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.autenticacaoDTO.userName = this.autenticacaoLoginForm.value.usuario;
     this.authService.autenticacaoDTO.password = this.autenticacaoLoginForm.value.password;
-    console.log(this.authService.autenticacaoDTO);
     this.authService.autenticar(this.authService.autenticacaoDTO).subscribe(
       (data) => {
         if(data){
+          this.authService.autenticado = true;
+          this.authService.setDadosUsuario = data;
           this.router.navigate(['animais']);
         } else {
-          alert('Usuário ou senha inválido');
+          alert('Json inválido');
           console.log("data error");
         }
       },
